@@ -20,12 +20,11 @@ const frontendPath = path.join(__dirname, '../');
 app.use(express.static(frontendPath));
 
 // Connect to MongoDB
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:0.0.0.0/index';
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/next-circuit';
 mongoose.connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    // Set a reasonable server selection timeout so failures surface quickly
-    serverSelectionTimeoutMS: 10000
+    serverSelectionTimeoutMS: 50000 
 })
 .then(() => console.log('✅ MongoDB connected'))
 .catch(err => {

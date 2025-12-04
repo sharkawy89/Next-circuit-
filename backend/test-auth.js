@@ -154,7 +154,7 @@ async function testGetProfile(token) {
     console.log('\n👤 Test 4: Get Profile (with JWT Token)');
     
     const options = {
-        hostname: 'localhost',
+        hostname: '127.0.0.1',
         port: 5000,
         path: '/api/auth/profile',
         method: 'GET',
