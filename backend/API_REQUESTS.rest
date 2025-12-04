@@ -1,0 +1,199 @@
+### Next-circuit API Testing Requests
+
+## Health Check
+GET http://localhost:5000/api/health
+
+---
+
+## Authentication
+
+### Register User
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123",
+  "confirmPassword": "password123"
+}
+
+### Login User
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "john@example.com",
+  "password": "password123"
+}
+
+### Get User Profile
+GET http://localhost:5000/api/auth/profile
+Authorization: Bearer YOUR_JWT_TOKEN
+
+---
+
+## Products
+
+### Get All Products
+GET http://localhost:5000/api/products
+
+### Get Products with Filters
+GET http://localhost:5000/api/products?category=smartphones&minPrice=500&maxPrice=1500
+
+### Get Single Product
+GET http://localhost:5000/api/products/PRODUCT_ID
+
+### Create Product (Admin)
+POST http://localhost:5000/api/products
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+
+{
+  "name": "Product Name",
+  "brand": "Brand Name",
+  "description": "Product description",
+  "price": 999.99,
+  "originalPrice": 1099.99,
+  "category": "smartphones",
+  "image": "image-url.jpg",
+  "rating": 4.5,
+  "stock": 10,
+  "isBestSeller": false,
+  "discount": 10
+}
+
+### Update Product (Admin)
+PUT http://localhost:5000/api/products/PRODUCT_ID
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+
+{
+  "price": 999.99,
+  "stock": 15
+}
+
+### Delete Product (Admin)
+DELETE http://localhost:5000/api/products/PRODUCT_ID
+Authorization: Bearer YOUR_JWT_TOKEN
+
+---
+
+## Shopping Cart
+
+### Get Cart
+GET http://localhost:5000/api/cart
+Authorization: Bearer YOUR_JWT_TOKEN
+
+### Add to Cart
+POST http://localhost:5000/api/cart/add
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+
+{
+  "productId": "PRODUCT_ID",
+  "quantity": 1
+}
+
+### Update Cart Item Quantity
+PUT http://localhost:5000/api/cart/update
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+
+{
+  "productId": "PRODUCT_ID",
+  "quantity": 2
+}
+
+### Remove from Cart
+POST http://localhost:5000/api/cart/remove
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+
+{
+  "productId": "PRODUCT_ID"
+}
+
+### Clear Cart
+DELETE http://localhost:5000/api/cart/clear
+Authorization: Bearer YOUR_JWT_TOKEN
+
+---
+
+## Orders
+
+### Create Order
+POST http://localhost:5000/api/orders
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+
+{
+  "shippingAddress": {
+    "street": "123 Main Street",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "country": "USA"
+  },
+  "paymentMethod": "credit_card"
+}
+
+### Get User Orders
+GET http://localhost:5000/api/orders
+Authorization: Bearer YOUR_JWT_TOKEN
+
+### Get Order Details
+GET http://localhost:5000/api/orders/ORDER_ID
+Authorization: Bearer YOUR_JWT_TOKEN
+
+### Update Order Status (Admin)
+PUT http://localhost:5000/api/orders/ORDER_ID/status
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+
+{
+  "status": "shipped",
+  "paymentStatus": "completed"
+}
+
+### Cancel Order
+DELETE http://localhost:5000/api/orders/ORDER_ID/cancel
+Authorization: Bearer YOUR_JWT_TOKEN
+
+---
+
+## Users
+
+### Get User Profile
+GET http://localhost:5000/api/users/profile
+Authorization: Bearer YOUR_JWT_TOKEN
+
+### Update User Profile
+PUT http://localhost:5000/api/users/profile
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+
+{
+  "name": "Jane Doe",
+  "phone": "+1-555-0123",
+  "address": {
+    "street": "456 Oak Avenue",
+    "city": "Los Angeles",
+    "state": "CA",
+    "zipCode": "90001",
+    "country": "USA"
+  }
+}
+
+### Get All Users (Admin)
+GET http://localhost:5000/api/users
+Authorization: Bearer YOUR_JWT_TOKEN
+
+---
+
+## Usage Notes
+
+1. Replace `YOUR_JWT_TOKEN` with the actual token received from login/register
+2. Replace `PRODUCT_ID`, `ORDER_ID` with actual MongoDB ObjectIds
+3. Use this file with REST Client extension in VS Code or Postman
+4. For Postman: Create environment variable `token` and `{{token}}` in requests

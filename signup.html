@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Next-circuit</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-navy': '#0D1B2A',
+                        'card-bg': '#1A2E40',
+                        'neon-cyan': '#00FFFF',
+                        'neon-accent': '#00E5CC',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="min-h-screen bg-dark-navy">
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="bg-dark-navy shadow-lg border-b border-neon-cyan/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <a href="/" class="flex items-center group">
+                    <img src="logo nc.png" alt="index Logo" class="h-auto w-[85px] mr-2 bg-[#0D1B2A] rounded-full border-[3px] border-[#00E5CC] transition-transform duration-200 group-hover:scale-105">
+                    <span class="text-3xl font-extrabold text-neon-cyan tracking-widest group-hover:text-neon-accent transition duration-150 hidden sm:block">Next-circuit</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow flex items-center justify-center px-4 py-12">
+            <div class="w-full max-w-md">
+                <div class="bg-card-bg rounded-xl shadow-2xl p-8 border border-neon-cyan/30">
+                    <div class="text-center mb-8">
+                        <h1 class="text-3xl font-bold text-gray-100 mb-2">Create Account</h1>
+                        <p class="text-gray-400">Join Next-circuit and start shopping</p>
+                    </div>
+
+                    <!-- Sign Up Form -->
+                    <form id="signup-form" class="space-y-6">
+                        <div>
+                            <label for="full-name" class="block text-sm font-medium text-gray-300 mb-2">
+                                Full Name
+                            </label>
+                            <div class="relative">
+                                <i data-lucide="user" class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                                <input 
+                                    type="text" 
+                                    id="full-name" 
+                                    name="full-name" 
+                                    required
+                                    placeholder="Enter your full name"
+                                    class="w-full pl-10 pr-4 py-3 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition duration-150"
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">
+                                Email Address
+                            </label>
+                            <div class="relative">
+                                <i data-lucide="mail" class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    required
+                                    placeholder="Enter your email"
+                                    class="w-full pl-10 pr-4 py-3 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition duration-150"
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-300 mb-2">
+                                Password
+                            </label>
+                            <div class="relative">
+                                <i data-lucide="lock" class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    required
+                                    placeholder="Create a password"
+                                    class="w-full pl-10 pr-4 py-3 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition duration-150"
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="confirm-password" class="block text-sm font-medium text-gray-300 mb-2">
+                                Confirm Password
+                            </label>
+                            <div class="relative">
+                                <i data-lucide="lock" class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                                <input 
+                                    type="password" 
+                                    id="confirm-password" 
+                                    name="confirm-password" 
+                                    required
+                                    placeholder="Confirm your password"
+                                    class="w-full pl-10 pr-4 py-3 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition duration-150"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <input 
+                                type="checkbox" 
+                                id="terms"
+                                required
+                                class="w-4 h-4 bg-dark-navy border-neon-cyan/50 rounded text-neon-cyan focus:ring-neon-cyan focus:ring-2"
+                            >
+                            <label for="terms" class="ml-2 text-sm text-gray-400">
+                                I agree to the <a href="#" class="text-neon-cyan hover:text-neon-accent transition">Terms and Conditions</a>
+                            </label>
+                        </div>
+
+                        <div id="error-message" class="hidden bg-red-600/20 border border-red-600 text-red-300 px-4 py-3 rounded-lg text-sm">
+                            <!-- Error messages will appear here -->
+                        </div>
+
+                        <button 
+                            type="submit"
+                            class="w-full py-3 bg-neon-cyan text-dark-navy font-bold rounded-lg hover:bg-neon-accent transition duration-200 shadow-xl flex items-center justify-center"
+                        >
+                            <i data-lucide="user-plus" class="w-5 h-5 mr-2"></i>
+                            Create Account
+                        </button>
+                    </form>
+
+                    <div class="mt-6 text-center">
+                        <p class="text-sm text-gray-400">
+                            Already have an account? 
+                            <a href="login.html" class="text-neon-cyan hover:text-neon-accent transition font-semibold">
+                                Sign in
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Notification Area -->
+        <div id="notification-area" class="fixed bottom-4 right-4 z-50 space-y-2">
+            <!-- Notifications will appear here -->
+        </div>
+    </div>
+
+    <script>
+        // Initialize icons
+        lucide.createIcons();
+
+        const API_URL = '/api';
+
+        // Helper: show notification
+        function showNotification(message, type = 'info') {
+            const area = document.getElementById('notification-area');
+            if (!area) return;
+            
+            const colorClass = {
+                success: 'bg-green-600 border-green-800',
+                error: 'bg-red-600 border-red-800',
+                info: 'bg-neon-cyan text-dark-navy border-neon-cyan'
+            }[type] || 'bg-gray-700 border-gray-500';
+
+            const iconName = {
+                success: 'check-circle',
+                error: 'alert-triangle',
+                info: 'info'
+            }[type] || 'message-circle';
+            
+            const textColor = type === 'info' ? 'text-dark-navy' : 'text-white';
+
+            const toast = document.createElement('div');
+            toast.className = `p-4 rounded-lg ${textColor} shadow-xl border-l-4 transition-all duration-300 opacity-0 transform translate-x-full ${colorClass} flex items-center min-w-[300px] max-w-[400px]`;
+            toast.style.transition = 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out';
+            toast.innerHTML = `
+                <i data-lucide="${iconName}" class="w-5 h-5 mr-3 flex-shrink-0"></i>
+                <span>${message}</span>
+            `;
+
+            area.appendChild(toast);
+            lucide.createIcons();
+
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    toast.classList.remove('opacity-0', 'translate-x-full');
+                    toast.classList.add('opacity-100', 'translate-x-0');
+                }, 10);
+            });
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-x-0');
+                toast.classList.add('opacity-0', 'translate-x-full');
+                setTimeout(() => {
+                    if (toast && toast.parentNode) {
+                        toast.remove();
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Handle form submission - call backend register
+        document.getElementById('signup-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const fullName = document.getElementById('full-name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const errorDiv = document.getElementById('error-message');
+
+            // Clear previous errors
+            errorDiv.classList.add('hidden');
+            errorDiv.textContent = '';
+
+            if (!fullName || !email || !password || !confirmPassword) {
+                errorDiv.textContent = 'Please fill in all fields.';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                errorDiv.textContent = 'Passwords do not match.';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: fullName, email, password, confirmPassword })
+                });
+
+                const data = await res.json();
+                if (!res.ok) {
+                    errorDiv.textContent = data.error || 'Registration failed.';
+                    errorDiv.classList.remove('hidden');
+                    showNotification(data.error || 'Registration failed', 'error');
+                    return;
+                }
+
+                // Success: store token and session
+                const sessionData = {
+                    email: data.user.email,
+                    name: data.user.name,
+                    loggedIn: true,
+                    token: data.token,
+                    registeredAt: new Date().toISOString()
+                };
+
+                sessionStorage.setItem('userSession', JSON.stringify(sessionData));
+                // store token for other frontend modules that read `authToken`
+                if (data.token) localStorage.setItem('authToken', data.token);
+                // Keep in localStorage for a smoother experience
+                localStorage.setItem('userSession', JSON.stringify(sessionData));
+
+                showNotification('Account created successfully! Redirecting...', 'success');
+                setTimeout(() => { window.location.href = 'index.html'; }, 700);
+            } catch (err) {
+                console.error('Register error:', err);
+                errorDiv.textContent = 'Unable to reach server. Please try again later.';
+                errorDiv.classList.remove('hidden');
+                showNotification('Registration failed', 'error');
+            }
+        });
+
+        // Check if already logged in, redirect to main page
+        window.addEventListener('DOMContentLoaded', () => {
+            const sessionData = sessionStorage.getItem('userSession') || localStorage.getItem('userSession');
+            if (sessionData) {
+                try {
+                    const user = JSON.parse(sessionData);
+                    if (user && user.loggedIn) {
+                        // Already logged in, redirect to main page
+                        window.location.href = 'index.html';
+                    }
+                } catch (e) {
+                    // Invalid session data, stay on signup page
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+

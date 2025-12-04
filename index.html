@@ -1,0 +1,320 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next-circuit - E-Commerce Store</title>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Custom Configuration --><script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Custom colors inspired by the logo
+                        // Custom colors inspired by the logo
+                        'dark-navy': '#0D1B2A',
+                        'card-bg': '#1A2E40', // Slightly lighter dark background for depth
+                        'neon-cyan': '#00FFFF',
+                        'neon-accent': '#00E5CC', // For hover states
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Load Lucide Icons --><script src="https://unpkg.com/lucide@latest"></script>
+     <link rel="stylesheet" href="index.css">
+    
+</head>
+<body class="min-h-screen">
+
+ 
+    <!-- Main Application Container --><div id="app" class="flex flex-col min-h-screen">
+
+        <!-- 1. Header and Navigation --><header class="sticky top-0 z-20 bg-dark-navy shadow-lg border-b border-neon-cyan/30">
+            <!-- Top Bar with Logo and Actions -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+                <!-- Logo/Title - Replaced with image --><a href="#" class="flex items-center group">
+                    <img src="logo nc.png" alt="Next-circuit Logo" class="h-auto w-[85px] mr-2 bg-[#0D1B2A] rounded-full border-[3px] border-[#00E5CC] transition-transform duration-200 group-hover:scale-105 ">
+                    <span class="text-3xl font-extrabold text-neon-cyan tracking-widest group-hover:text-neon-accent transition duration-150 hidden sm:block">Next-circuit</span>
+                </a>
+
+                <!-- Search Bar (Non-functional mock) --><div class="hidden md:flex flex-grow max-w-lg mx-8">
+                    <input type="text" placeholder="Search products, brands..."
+                           class="w-full p-2 border border-neon-cyan/50 rounded-l-lg focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition duration-150 shadow-md bg-dark-navy text-gray-100"
+                           aria-label="Search Bar">
+                    <button class="bg-neon-cyan text-dark-navy p-2 rounded-r-lg hover:bg-neon-accent transition duration-150 shadow-lg">
+                        <i data-lucide="search" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <!-- Right Side Actions -->
+                <div class="flex items-center gap-3">
+                    <!-- Login/Logout Button -->
+                    <button id="auth-button" onclick="handleAuth()" 
+                            class="flex items-center px-4 py-2 bg-neon-cyan hover:bg-neon-accent text-dark-navy rounded-lg transition duration-150 shadow-md font-semibold">
+                        <i data-lucide="log-in" class="w-5 h-5 mr-2"></i>
+                        <span class="hidden sm:inline" id="auth-text">Login</span>
+                    </button>
+
+                    <!-- Cart Button -->
+                    <button id="cart-toggle-button"
+                            class="relative p-2 bg-card-bg rounded-lg text-neon-cyan hover:bg-neon-cyan hover:text-dark-navy transition duration-150 shadow-md">
+                        <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full transition duration-300 transform scale-0 opacity-0">
+                            0
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="bg-card-bg border-t border-neon-cyan/30">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center gap-1 overflow-x-auto custom-scroll py-3">
+                        <!-- Main Sections -->
+                        <a href="#featured-products" onclick="scrollToSection('featured-products'); return false;" 
+                           class="nav-link flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 bg-neon-cyan text-dark-navy font-semibold whitespace-nowrap">
+                            <i data-lucide="grid" class="w-4 h-4"></i>
+                            <span>All Products</span>
+                        </a>
+                        <a href="#best-sellers" onclick="scrollToSection('best-sellers'); return false;" 
+                           class="nav-link flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 bg-card-bg text-gray-300 hover:bg-card-bg/80 hover:text-neon-cyan whitespace-nowrap">
+                            <i data-lucide="award" class="w-4 h-4"></i>
+                            <span>Best Sellers</span>
+                        </a>
+                        <a href="#today-deals" onclick="scrollToSection('today-deals'); return false;" 
+                           class="nav-link flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 bg-card-bg text-gray-300 hover:bg-card-bg/80 hover:text-neon-cyan whitespace-nowrap">
+                            <i data-lucide="tag" class="w-4 h-4"></i>
+                            <span>Today's Deals</span>
+                        </a>
+                        
+                        <!-- Category Separator -->
+                        <span class="mx-2 text-gray-600">|</span>
+                        
+                        <!-- Categories -->
+                        <a href="#category-smartphones" onclick="scrollToCategory('smartphones'); return false;" 
+                           class="nav-link flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 bg-card-bg text-gray-300 hover:bg-card-bg/80 hover:text-neon-cyan whitespace-nowrap">
+                            <i data-lucide="smartphone" class="w-4 h-4"></i>
+                            <span>Smartphones</span>
+                        </a>
+                        <a href="#category-laptops" onclick="scrollToCategory('laptops'); return false;" 
+                           class="nav-link flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 bg-card-bg text-gray-300 hover:bg-card-bg/80 hover:text-neon-cyan whitespace-nowrap">
+                            <i data-lucide="laptop" class="w-4 h-4"></i>
+                            <span>Laptops</span>
+                        </a>
+                        <a href="#category-gaming" onclick="scrollToCategory('gaming'); return false;" 
+                           class="nav-link flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 bg-card-bg text-gray-300 hover:bg-card-bg/80 hover:text-neon-cyan whitespace-nowrap">
+                            <i data-lucide="gamepad-2" class="w-4 h-4"></i>
+                            <span>Gaming</span>
+                        </a>
+                        <a href="#category-audio" onclick="scrollToCategory('audio'); return false;" 
+                           class="nav-link flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 bg-card-bg text-gray-300 hover:bg-card-bg/80 hover:text-neon-cyan whitespace-nowrap">
+                            <i data-lucide="headphones" class="w-4 h-4"></i>
+                            <span>Audio</span>
+                        </a>
+                        <a href="#category-smart-home" onclick="scrollToCategory('smart-home'); return false;" 
+                           class="nav-link flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 bg-card-bg text-gray-300 hover:bg-card-bg/80 hover:text-neon-cyan whitespace-nowrap">
+                            <i data-lucide="home" class="w-4 h-4"></i>
+                            <span>Smart Home</span>
+                        </a>
+                        <a href="#category-accessories" onclick="scrollToCategory('accessories'); return false;" 
+                           class="nav-link flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 bg-card-bg text-gray-300 hover:bg-card-bg/80 hover:text-neon-cyan whitespace-nowrap">
+                            <i data-lucide="cable" class="w-4 h-4"></i>
+                            <span>Accessories</span>
+                        </a>
+                        <a href="#category-tvs" onclick="scrollToCategory('tvs'); return false;" 
+                           class="nav-link flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 bg-card-bg text-gray-300 hover:bg-card-bg/80 hover:text-neon-cyan whitespace-nowrap">
+                            <i data-lucide="tv" class="w-4 h-4"></i>
+                            <span>TVs & Displays</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- 2. Main Content Area --><main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Best Sellers Section -->
+            <section id="best-sellers" class="mb-12 scroll-mt-24">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-3xl font-bold text-gray-100 flex items-center gap-2">
+                        <i data-lucide="award" class="w-8 h-8 text-yellow-400"></i>
+                        Best Sellers
+                    </h2>
+                    <button onclick="scrollToSection('featured-products')" class="text-neon-cyan hover:text-neon-accent text-sm font-semibold flex items-center gap-1">
+                        View All
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+                <div id="best-sellers-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Best sellers will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Today's Deals Section -->
+            <section id="today-deals" class="mb-12 scroll-mt-24">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-3xl font-bold text-gray-100 flex items-center gap-2">
+                        <i data-lucide="tag" class="w-8 h-8 text-red-500"></i>
+                        Today's Deals
+                    </h2>
+                    <button onclick="scrollToSection('featured-products')" class="text-neon-cyan hover:text-neon-accent text-sm font-semibold flex items-center gap-1">
+                        View All Deals
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+                <div id="deals-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Deals will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- All Products Section -->
+            <section id="featured-products" class="scroll-mt-24">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 id="products-section-title" class="text-3xl font-bold text-gray-100">
+                        All Products
+                    </h2>
+                    <div class="text-sm text-gray-400">
+                        Showing <span id="product-count">0</span> products
+                    </div>
+                </div>
+                <!-- Product Grid --><div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Products will be dynamically inserted here --></div>
+            </section>
+        </main>
+
+        <!-- 3. Shopping Cart Sidebar --><div id="cart-sidebar"
+             class="fixed right-0 top-0 h-full w-full sm:w-96 bg-card-bg shadow-2xl z-30 transform translate-x-full transition-transform duration-300 flex flex-col p-6 custom-scroll overflow-y-auto border-l border-neon-cyan/50">
+
+            <div class="flex justify-between items-center mb-6 border-b border-gray-700 pb-4">
+                <h3 class="text-2xl font-bold text-gray-100 flex items-center">
+                    <i data-lucide="shopping-cart" class="w-6 h-6 mr-2 text-neon-cyan"></i>
+                    Your Cart
+                </h3>
+                <button id="close-cart-button" class="text-gray-400 hover:text-neon-cyan transition">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <div id="cart-items-container" class="flex-grow space-y-4 overflow-y-auto custom-scroll pr-2">
+                <!-- Cart items will be dynamically inserted here --></div>
+
+            <div class="mt-6 pt-6 border-t border-gray-700">
+                <div class="flex justify-between items-center text-xl font-semibold mb-4 text-gray-100 ">
+                    <span>Total:</span>
+                    <span id="cart-total" class="text-neon-cyan font-extrabold">$0.00</span>
+                </div>
+                <!-- ADDED onclick handler to trigger order placement --><button onclick="placeOrder()" 
+                        class="w-full py-3 bg-neon-cyan text-dark-navy font-bold rounded-lg hover:bg-neon-accent transition duration-200 shadow-xl flex items-center justify-center">
+                    <i data-lucide="check-circle" class="w-5 h-5 mr-2"></i>
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+
+        <!-- 4. Notification/Toast Area --><div id="notification-area" class="fixed bottom-4 right-4 z-50 space-y-2">
+            <!-- Notifications will appear here --></div>
+    </div>
+    <script src="index.js"></script>
+    <script>
+        // Handle authentication button click
+        function handleAuth() {
+            const sessionData = sessionStorage.getItem('userSession') || localStorage.getItem('userSession');
+            if (sessionData) {
+                // User is logged in, show logout option
+                if (confirm('Are you sure you want to logout?')) {
+                    sessionStorage.removeItem('userSession');
+                    localStorage.removeItem('userSession');
+                    window.location.href = 'login.html';
+                }
+            } else {
+                // User is not logged in, go to login page
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Update auth button based on login status
+        function updateAuthButton() {
+            const authButton = document.getElementById('auth-button');
+            const authText = document.getElementById('auth-text');
+            const sessionData = sessionStorage.getItem('userSession') || localStorage.getItem('userSession');
+            
+            if (sessionData) {
+                try {
+                    const user = JSON.parse(sessionData);
+                    if (user.loggedIn) {
+                        // User is logged in - show logout
+                        authButton.innerHTML = '<i data-lucide="log-out" class="w-5 h-5 mr-2"></i><span class="hidden sm:inline">Logout</span>';
+                        authButton.className = 'flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition duration-150 shadow-md font-semibold';
+                        if (authText) authText.textContent = 'Logout';
+                        lucide.createIcons();
+                    }
+                } catch (e) {
+                    // Invalid session
+                }
+            }
+        }
+
+        // Scroll to section function
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Update active nav link
+                updateActiveNavLink(sectionId);
+            }
+        }
+
+        // Scroll to category function
+        function scrollToCategory(categoryId) {
+            // Filter by category first
+            if (typeof filterByCategory === 'function') {
+                filterByCategory(categoryId);
+            }
+            // Then scroll to products section
+            setTimeout(() => {
+                scrollToSection('featured-products');
+            }, 100);
+        }
+
+        // Update active navigation link
+        function updateActiveNavLink(activeId) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('bg-neon-cyan', 'text-dark-navy', 'font-semibold');
+                link.classList.add('bg-card-bg', 'text-gray-300');
+            });
+            
+            // Find and activate the clicked link
+            const activeLink = document.querySelector(`[href="#${activeId}"], [onclick*="${activeId}"]`);
+            if (activeLink && activeLink.classList.contains('nav-link')) {
+                activeLink.classList.remove('bg-card-bg', 'text-gray-300');
+                activeLink.classList.add('bg-neon-cyan', 'text-dark-navy', 'font-semibold');
+            }
+        }
+
+        // Check if user is logged in, redirect to login if not
+        window.addEventListener('DOMContentLoaded', () => {
+            const sessionData = sessionStorage.getItem('userSession') || localStorage.getItem('userSession');
+            if (!sessionData) {
+                // Not logged in, redirect to login page
+                window.location.href = 'login.html';
+            } else {
+                try {
+                    const user = JSON.parse(sessionData);
+                    if (!user.loggedIn) {
+                        // Invalid session, redirect to login
+                        window.location.href = 'login.html';
+                    } else {
+                        // User is logged in, update UI
+                        updateAuthButton();
+                        // Initialize icons for navigation
+                        lucide.createIcons();
+                    }
+                } catch (e) {
+                    // Invalid session data, redirect to login
+                    window.location.href = 'login.html';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
