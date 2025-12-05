@@ -36,6 +36,9 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+// Compression responses
+const compression = require('compression'); 
+app.use(compression());
 
 // Serve static frontend files
 const frontendPath = path.join(__dirname, '../');
