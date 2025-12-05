@@ -101,3 +101,19 @@ app.listen(PORT, () => {
     console.log(`📖 Visit http://${HOST}:${PORT} to see the app`);
     console.log(`📡 API available at http://${HOST}:${PORT}/api`);
 });
+ 
+
+// At the end of your backend/server.js file:
+const path = require('path');
+// ... all your API routes ...
+
+// Serve the static frontend files
+app.use(express.static(path.join(__dirname, '..', 'frontend'))); // Assuming frontend files are in a 'frontend' directory adjacent to 'backend'
+
+// Add a catch-all route to serve your index file for any unhandled routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
+});
+
+// Replace app.listen with module.exports for Vercel
+module.exports = app;
