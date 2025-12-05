@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Next-Circuit</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-navy': '#0D1B2A',
+                        'card-bg': '#1A2E40',
+                        'neon-cyan': '#00FFFF',
+                        'neon-accent': '#00E5CC',
+                    }
+                } 
+            }
+        }
+    </script>
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="index.css">
+</head> 
+<body class="min-h-screen bg-dark-navy">
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="bg-dark-navy shadow-lg border-b border-neon-cyan/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <a href="index.html" class="flex items-center group">
+                    <img src="logo nc.png" alt="Next-circuit Logo" class="h-auto w-[85px] mr-2 bg-[#0D1B2A] rounded-full border-[3px] border-[#00E5CC] transition-transform duration-200 group-hover:scale-105">
+                    <span class="text-3xl font-extrabold text-neon-cyan tracking-widest group-hover:text-neon-accent transition duration-150 hidden sm:block">Next-circuit</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="mb-6">
+                <h1 class="text-3xl font-bold text-gray-100 mb-2">Checkout</h1>
+                <p class="text-gray-400">Complete your purchase</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Column - Payment & Shipping Info -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Shipping Information -->
+                    <div class="bg-card-bg rounded-xl shadow-xl p-6 border border-neon-cyan/30">
+                        <h2 class="text-xl font-bold text-gray-100 mb-4 flex items-center">
+                            <i data-lucide="truck" class="w-5 h-5 mr-2 text-neon-cyan"></i>
+                            Shipping Information
+                        </h2>
+                        <form id="shipping-form" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="first-name" class="block text-sm font-medium text-gray-300 mb-2">First Name</label>
+                                    <input type="text" id="first-name" required
+                                           class="w-full px-4 py-2 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition">
+                                </div>
+                                <div>
+                                    <label for="last-name" class="block text-sm font-medium text-gray-300 mb-2">Last Name</label>
+                                    <input type="text" id="last-name" required
+                                           class="w-full px-4 py-2 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                                <input type="email" id="email" required
+                                       class="w-full px-4 py-2 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
+                                <input type="tel" id="phone" required
+                                       class="w-full px-4 py-2 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition">
+                            </div>
+                            <div>
+                                <label for="address" class="block text-sm font-medium text-gray-300 mb-2">Street Address</label>
+                                <input type="text" id="address" required
+                                       class="w-full px-4 py-2 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition">
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label for="city" class="block text-sm font-medium text-gray-300 mb-2">City</label>
+                                    <input type="text" id="city" required
+                                           class="w-full px-4 py-2 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition">
+                                </div>
+                                <div>
+                                    <label for="state" class="block text-sm font-medium text-gray-300 mb-2">State/Province</label>
+                                    <input type="text" id="state" required
+                                           class="w-full px-4 py-2 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition">
+                                </div>
+                                <div>
+                                    <label for="zip" class="block text-sm font-medium text-gray-300 mb-2">ZIP/Postal Code</label>
+                                    <input type="text" id="zip" required
+                                           class="w-full px-4 py-2 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="country" class="block text-sm font-medium text-gray-300 mb-2">Country</label>
+                                <select id="country" required
+                                        class="w-full px-4 py-2 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition">
+                                    <option value="Egypt">Egypt</option>
+                                    <option value="USA">United States</option>
+                                    <option value="UK">United Kingdom</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="Germany">Germany</option>
+                                    <option value="France">France</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Payment Information -->
+                    <div class="bg-card-bg rounded-xl shadow-xl p-6 border border-neon-cyan/30">
+                        <h2 class="text-xl font-bold text-gray-100 mb-4 flex items-center">
+                            <i data-lucide="credit-card" class="w-5 h-5 mr-2 text-neon-cyan"></i>
+                            Payment Information
+                        </h2>
+                        <form id="payment-form" class="space-y-4">
+                            <div>
+                                <label for="card-name" class="block text-sm font-medium text-gray-300 mb-2">Cardholder Name</label>
+                                <input type="text" id="card-name" required placeholder="John Doe"
+                                       class="w-full px-4 py-2 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition">
+                            </div>
+                            <div>
+                                <label for="card-number" class="block text-sm font-medium text-gray-300 mb-2">Card Number</label>
+                                <input type="text" id="card-number" required placeholder="1234 5678 9012 3456" maxlength="19"
+                                       class="w-full px-4 py-2 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label for="card-expiry" class="block text-sm font-medium text-gray-300 mb-2">Expiry Date</label>
+                                    <input type="text" id="card-expiry" required placeholder="MM/YY" maxlength="5"
+                                           class="w-full px-4 py-2 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition">
+                                </div>
+                                <div>
+                                    <label for="card-cvv" class="block text-sm font-medium text-gray-300 mb-2">CVV</label>
+                                    <input type="text" id="card-cvv" required placeholder="123" maxlength="4"
+                                           class="w-full px-4 py-2 bg-dark-navy border border-neon-cyan/50 rounded-lg text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-neon-cyan focus:border-neon-cyan transition">
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="save-card" class="w-4 h-4 bg-dark-navy border-neon-cyan/50 rounded text-neon-cyan focus:ring-neon-cyan">
+                                <label for="save-card" class="ml-2 text-sm text-gray-400">Save card for future purchases</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right Column - Order Summary -->
+                <div class="lg:col-span-1">
+                    <div class="bg-card-bg dark:bg-card-bg light:bg-white rounded-xl shadow-xl p-6 border border-neon-cyan/30 sticky top-24 theme-bg-card">
+                        <h2 class="text-xl font-bold text-gray-100 mb-4 flex items-center">
+                            <i data-lucide="receipt" class="w-5 h-5 mr-2 text-neon-cyan"></i>
+                            Order Summary
+                        </h2>
+                        
+                        <div id="order-items" class="space-y-3 mb-4 max-h-64 overflow-y-auto custom-scroll">
+                            <!-- Order items will be dynamically inserted here -->
+                        </div>
+
+                        <div class="border-t border-gray-700 pt-4 space-y-2 mb-4">
+                            <div class="flex justify-between text-gray-300">
+                                <span>Subtotal</span>
+                                <span id="subtotal">$0.00</span>
+                            </div>
+                            <div class="flex justify-between text-gray-300">
+                                <span>Shipping</span>
+                                <span id="shipping">$0.00</span>
+                            </div>
+                            <div class="flex justify-between text-gray-300">
+                                <span>Tax</span>
+                                <span id="tax">$0.00</span>
+                            </div>
+                            <div class="border-t border-gray-700 pt-2 flex justify-between text-xl font-bold text-gray-100">
+                                <span>Total</span>
+                                <span id="total" class="text-neon-cyan">$0.00</span>
+                            </div>
+                        </div>
+
+                        <button id="complete-order-btn" onclick="completeOrder()"
+                                class="w-full py-3 bg-neon-cyan text-dark-navy font-bold rounded-lg hover:bg-neon-accent transition duration-200 shadow-xl flex items-center justify-center">
+                            <i data-lucide="check-circle" class="w-5 h-5 mr-2"></i>
+                            Complete Order
+                        </button>
+
+                        <a href="index.html" class="block text-center mt-4 text-sm text-neon-cyan hover:text-neon-accent transition">
+                            <i data-lucide="arrow-left" class="w-4 h-4 inline mr-1"></i>
+                            Back to Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Notification Area -->
+        <div id="notification-area" class="fixed bottom-4 right-4 z-50 space-y-2">
+            <!-- Notifications will appear here -->
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+    <script>
+        // Initialize icons
+        lucide.createIcons();
+
+        // Format card number input
+        document.getElementById('card-number')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Format expiry date input
+        document.getElementById('card-expiry')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Load cart data and display order summary
+        function loadOrderSummary() {
+            const cartData = sessionStorage.getItem('checkoutCart');
+            if (!cartData) {
+                showNotification('No items in cart. Redirecting...', 'error');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                return;
+            }
+
+            try {
+                const cart = JSON.parse(cartData);
+                const orderItemsContainer = document.getElementById('order-items');
+                let subtotal = 0;
+
+                if (cart.length === 0) {
+                    orderItemsContainer.innerHTML = '<p class="text-gray-400 text-center py-4">No items in cart</p>';
+                    return;
+                }
+
+                // Get products from MOCK_PRODUCTS (assuming it's available)
+                orderItemsContainer.innerHTML = cart.map(item => {
+                    const product = getProductById(item.productId);
+                    if (!product) return '';
+                    
+                    const itemTotal = product.price * item.quantity;
+                    subtotal += itemTotal;
+
+                    return `
+                        <div class="flex items-center gap-3">
+                            <img src="${product.image}" alt="${product.name}" class="w-16 h-16 object-cover rounded-md">
+                            <div class="flex-grow">
+                                <p class="text-sm font-semibold text-gray-100">${product.name}</p>
+                                <p class="text-xs text-gray-400">Qty: ${item.quantity}</p>
+                            </div>
+                            <p class="text-sm font-bold text-neon-cyan">$${(itemTotal).toFixed(2)}</p>
+                        </div>
+                    `;
+                }).join('');
+
+                // Calculate totals
+                const shipping = subtotal > 100 ? 0 : 10; // Free shipping over $100
+                const tax = subtotal * 0.1; // 10% tax
+                const total = subtotal + shipping + tax;
+
+                document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+                document.getElementById('shipping').textContent = shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`;
+                document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+                document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+
+            } catch (e) {
+                console.error('Error loading order summary:', e);
+                showNotification('Error loading cart. Please try again.', 'error');
+            }
+        }
+
+        // Complete order function
+        function completeOrder() {
+            // Validate forms
+            const shippingForm = document.getElementById('shipping-form');
+            const paymentForm = document.getElementById('payment-form');
+
+            if (!shippingForm.checkValidity() || !paymentForm.checkValidity()) {
+                showNotification('Please fill in all required fields.', 'error');
+                shippingForm.reportValidity();
+                paymentForm.reportValidity();
+                return;
+            }
+
+            // Get form data
+            const shippingData = {
+                firstName: document.getElementById('first-name').value,
+                lastName: document.getElementById('last-name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                zip: document.getElementById('zip').value,
+                country: document.getElementById('country').value
+            };
+
+            const paymentData = {
+                cardName: document.getElementById('card-name').value,
+                cardNumber: document.getElementById('card-number').value,
+                cardExpiry: document.getElementById('card-expiry').value,
+                cardCVV: document.getElementById('card-cvv').value
+            };
+
+            // Show processing notification
+            showNotification('Processing your order...', 'info');
+
+            // Simulate payment processing
+            setTimeout(() => {
+                // Clear cart from session storage
+                sessionStorage.removeItem('checkoutCart');
+                
+                // Store order confirmation
+                const orderData = {
+                    orderId: 'ORD-' + Date.now(),
+                    shipping: shippingData,
+                    payment: paymentData,
+                    timestamp: new Date().toISOString()
+                };
+                sessionStorage.setItem('lastOrder', JSON.stringify(orderData));
+
+                // Show success and redirect
+                showNotification('Order placed successfully!', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            }, 2000);
+        }
+
+        // Notification function
+        function showNotification(message, type = 'info') {
+            const area = document.getElementById('notification-area');
+            if (!area) return;
+            
+            const colorClass = {
+                success: 'bg-green-600 border-green-800',
+                error: 'bg-red-600 border-red-800',
+                info: 'bg-neon-cyan text-dark-navy border-neon-cyan'
+            }[type] || 'bg-gray-700 border-gray-500';
+
+            const iconName = {
+                success: 'check-circle',
+                error: 'alert-triangle',
+                info: 'info'
+            }[type] || 'message-circle';
+            
+            const textColor = type === 'info' ? 'text-dark-navy' : 'text-white';
+
+            const toast = document.createElement('div');
+            toast.className = `p-4 rounded-lg ${textColor} shadow-xl border-l-4 transition-all duration-300 opacity-0 transform translate-x-full ${colorClass} flex items-center min-w-[300px] max-w-[400px]`;
+            toast.style.transition = 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out';
+            toast.innerHTML = `
+                <i data-lucide="${iconName}" class="w-5 h-5 mr-3 flex-shrink-0"></i>
+                <span>${message}</span>
+            `;
+
+            area.appendChild(toast);
+            lucide.createIcons();
+
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    toast.classList.remove('opacity-0', 'translate-x-full');
+                    toast.classList.add('opacity-100', 'translate-x-0');
+                }, 10);
+            });
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-x-0');
+                toast.classList.add('opacity-0', 'translate-x-full');
+                setTimeout(() => {
+                    if (toast && toast.parentNode) {
+                        toast.remove();
+                    }
+                }, 300);
+            }, 5000);
+        }
+
+        // Check authentication
+        window.addEventListener('DOMContentLoaded', () => {
+            const sessionData = sessionStorage.getItem('userSession') || localStorage.getItem('userSession');
+            if (!sessionData) {
+                window.location.href = 'login.html';
+            } else {
+                loadOrderSummary();
+            }
+        });
+    </script>
+</body>
+</html>
+
