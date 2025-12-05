@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "build": "[my-framework] build --output public",
     "dev": "nodemon server.js",
     "seed": "node seed.js"
   },
@@ -13,7 +14,6 @@
     "api",
     "express"
   ],
-
 
 
   "author": "",
