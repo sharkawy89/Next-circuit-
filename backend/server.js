@@ -17,7 +17,7 @@ app.use(express.json());
 
 const allowedOrigins = [
     // Your Vercel domain (e.g., https://next-circuit-xxxx.vercel.app)
-    'https://next-circuit-yur1.vercel.app', 
+    'https://next-circuit-43ai.vercel.app', 
     'http://localhost:5000' // For local testing
 ];
 
