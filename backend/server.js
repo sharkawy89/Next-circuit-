@@ -93,8 +93,11 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
+const HOST = process.env.HOST || 'localhost';
+
 app.listen(PORT, () => {
-    console.log(`🚀 Full-Stack Server running on http://localhost:${PORT}`);
-    console.log(`📖 Visit http://localhost:${PORT} to see the app`);
-    console.log(`📡 API available at http://localhost:${PORT}/api`);
+    // Use HOST env var if provided for flexible messaging in containers/hosts
+    console.log(`🚀 Full-Stack Server running on http://${HOST}:${PORT}`);
+    console.log(`📖 Visit http://${HOST}:${PORT} to see the app`);
+    console.log(`📡 API available at http://${HOST}:${PORT}/api`);
 });

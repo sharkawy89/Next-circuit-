@@ -1,6 +1,6 @@
 @echo off
 REM Test script for authentication flow
-REM Prerequisites: MongoDB running, backend server on http://localhost:5000
+REM Prerequisites: MongoDB running, backend server available at http://<HOST>:<PORT> (defaults to HOST=localhost, PORT=5000)
 
 cd /d "%~dp0backend"
 

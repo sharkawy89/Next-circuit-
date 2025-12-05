@@ -72,7 +72,7 @@ NODE_ENV=production
 ```bash
 npm run dev
 ```
-Server runs on **http://localhost:5000**
+Server runs on **http://localhost:${PORT:-5000}** (replace PORT in `.env` if you changed it)
 
 ### 5. Seed Sample Data (Optional)
 ```bash
@@ -81,9 +81,9 @@ npm run seed
 Populates 8 sample products into your database
 
 ### 6. Access the Application
-- **Frontend**: http://localhost:5000
-- **API Docs**: http://localhost:5000/api
-- **Health Check**: http://localhost:5000/api/health
+- **Frontend**: http://localhost:${PORT:-5000} (or `${location.origin}` when accessed via browser)
+- **API Docs**: http://localhost:${PORT:-5000}/api
+- **Health Check**: http://localhost:${PORT:-5000}/api/health
 
 ## 📡 API Endpoints
 

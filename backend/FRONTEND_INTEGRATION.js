@@ -1,7 +1,13 @@
 // FRONTEND INTEGRATION GUIDE
 // Add this to your index.js or create a new api-client.js file
 
-const API_URL = 'http://localhost:5000/api';
+// Determine API base in a dynamic way:
+// 1) In browsers prefer relative calls using current origin -> `${location.origin}/api`
+// 2) You can also expose `window.__API_BASE__` for custom origins
+// 3) When running server-side tests, use process.env.API_BASE
+const API_URL = (typeof window !== 'undefined')
+    ? (window.__API_BASE__ || `${location.origin}/api`)
+    : (process.env.API_BASE || `http://localhost:${process.env.PORT || 5000}/api`);
 let authToken = localStorage.getItem('authToken');
 
 // ===== Authentication API =====

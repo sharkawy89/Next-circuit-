@@ -45,7 +45,7 @@
    ────────────────────────────
    npm run dev
    
-   ✅ Server will start at: http://localhost:5000
+   ✅ Server will start at: http://<HOST>:<PORT> (defaults to HOST=localhost, PORT=5000)
 
 
 📚 READ THESE FIRST:
@@ -70,7 +70,7 @@
    
    Option 3:
    → Open PowerShell
-   → curl http://localhost:5000/api/health
+   → curl http://<HOST>:<PORT>/api/health (defaults to HOST=localhost, PORT=5000)
 
 
 📁 BACKEND STRUCTURE:
@@ -194,7 +194,9 @@
 
    Copy this code into your index.js:
    
-   const API_URL = 'http://localhost:5000/api';
+   // Prefer relative API calls in browser-hosted frontends; this will work across ports/environments
+   // Option A (recommended in browser): const API_URL = `${location.origin}/api`;
+   // Option B (override if you need a different host): window.__API_BASE__ = 'https://your-host.com'; const API_URL = window.__API_BASE__ || `${location.origin}/api`;
    
    // Get products from backend
    async function getProducts() {
@@ -366,7 +368,7 @@ START HERE:
 │  npm install                                                │
 │  npm run dev                                                │
 │                                                             │
-│  Server will start at: http://localhost:5000               │
+│  Server will start at: http://<HOST>:<PORT> (defaults to HOST=localhost, PORT=5000) │
 │                                                             │
 │  ✅ Backend is running!                                     │
 │  🧪 Test endpoints with REST Client or Postman            │

@@ -39,7 +39,7 @@ mongod
 ### 3️⃣ Start Backend Server
 ```powershell
 npm run dev
-# Server running at http://localhost:5000
+# Server running at http://<HOST>:<PORT> (defaults to HOST=localhost, PORT=5000)
 ```
 
 ✅ **DONE!** Backend is ready! 🎉
@@ -71,11 +71,11 @@ npm run dev
 
 ### Option 2: Terminal
 ```powershell
-# Check if server is running
-curl http://localhost:5000/api/health
+# Check if server is running (adjust PORT if you changed it)
+curl http://localhost:<PORT>/api/health
 
 # Get all products
-curl http://localhost:5000/api/products
+curl http://localhost:<PORT>/api/products
 ```
 
 ### Option 3: Postman
@@ -93,7 +93,10 @@ curl http://localhost:5000/api/products
 ```javascript
 // Replace in your index.js
 
-const API_URL = 'http://localhost:5000/api';
+// Use a dynamic API base so it works with any port/host
+// Browser-friendly: const API_URL = `${location.origin}/api`;
+// Or set window.__API_BASE__ = 'https://api.example.com' and then:
+// const API_URL = window.__API_BASE__ || `${location.origin}/api`;
 
 // Get products from backend instead of mock data
 async function loadProducts() {
@@ -388,7 +391,7 @@ cd backend
 npm run dev
 ```
 
-**Backend running at: http://localhost:5000** ✅
+**Backend running at: http://<HOST>:<PORT> (e.g. http://<HOST>:<PORT>)** ✅
 
 ---
 

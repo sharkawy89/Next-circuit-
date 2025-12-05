@@ -1,14 +1,19 @@
 ### Next-circuit API Testing Requests
 
+# NOTE: replace the base URL as needed in your REST client or set an environment variable `API_BASE`.
+# Example (VSCode REST Client env):
+# @api.base = http://<HOST>:<PORT>   # Define `api.base` (for example: http://<HOST>:<PORT>) or use REST Client environment variables
+# Then use {{api.base}} in place of the host below.
+
 ## Health Check
-GET http://localhost:5000/api/health
+GET {{api.base}}/api/health
 
 ---
 
 ## Authentication
 
 ### Register User
-POST http://localhost:5000/api/auth/register
+POST {{api.base}}/api/auth/register
 Content-Type: application/json
 
 {
@@ -19,7 +24,7 @@ Content-Type: application/json
 }
 
 ### Login User
-POST http://localhost:5000/api/auth/login
+POST {{api.base}}/api/auth/login
 Content-Type: application/json
 
 {
@@ -28,7 +33,7 @@ Content-Type: application/json
 }
 
 ### Get User Profile
-GET http://localhost:5000/api/auth/profile
+GET {{api.base}}/api/auth/profile
 Authorization: Bearer YOUR_JWT_TOKEN
 
 ---
@@ -36,16 +41,16 @@ Authorization: Bearer YOUR_JWT_TOKEN
 ## Products
 
 ### Get All Products
-GET http://localhost:5000/api/products
+GET {{api.base}}/api/products
 
 ### Get Products with Filters
-GET http://localhost:5000/api/products?category=smartphones&minPrice=500&maxPrice=1500
+GET {{api.base}}/api/products?category=smartphones&minPrice=500&maxPrice=1500
 
 ### Get Single Product
-GET http://localhost:5000/api/products/PRODUCT_ID
+GET {{api.base}}/api/products/PRODUCT_ID
 
 ### Create Product (Admin)
-POST http://localhost:5000/api/products
+POST {{api.base}}/api/products
 Authorization: Bearer YOUR_JWT_TOKEN
 Content-Type: application/json
 
@@ -64,7 +69,7 @@ Content-Type: application/json
 }
 
 ### Update Product (Admin)
-PUT http://localhost:5000/api/products/PRODUCT_ID
+PUT {{api.base}}/api/products/PRODUCT_ID
 Authorization: Bearer YOUR_JWT_TOKEN
 Content-Type: application/json
 
@@ -74,7 +79,7 @@ Content-Type: application/json
 }
 
 ### Delete Product (Admin)
-DELETE http://localhost:5000/api/products/PRODUCT_ID
+DELETE {{api.base}}/api/products/PRODUCT_ID
 Authorization: Bearer YOUR_JWT_TOKEN
 
 ---
@@ -82,11 +87,11 @@ Authorization: Bearer YOUR_JWT_TOKEN
 ## Shopping Cart
 
 ### Get Cart
-GET http://localhost:5000/api/cart
+GET {{api.base}}/api/cart
 Authorization: Bearer YOUR_JWT_TOKEN
 
 ### Add to Cart
-POST http://localhost:5000/api/cart/add
+POST {{api.base}}/api/cart/add
 Authorization: Bearer YOUR_JWT_TOKEN
 Content-Type: application/json
 
@@ -96,7 +101,7 @@ Content-Type: application/json
 }
 
 ### Update Cart Item Quantity
-PUT http://localhost:5000/api/cart/update
+PUT {{api.base}}/api/cart/update
 Authorization: Bearer YOUR_JWT_TOKEN
 Content-Type: application/json
 
@@ -106,7 +111,7 @@ Content-Type: application/json
 }
 
 ### Remove from Cart
-POST http://localhost:5000/api/cart/remove
+POST {{api.base}}/api/cart/remove
 Authorization: Bearer YOUR_JWT_TOKEN
 Content-Type: application/json
 
@@ -115,7 +120,7 @@ Content-Type: application/json
 }
 
 ### Clear Cart
-DELETE http://localhost:5000/api/cart/clear
+DELETE {{api.base}}/api/cart/clear
 Authorization: Bearer YOUR_JWT_TOKEN
 
 ---
@@ -123,7 +128,7 @@ Authorization: Bearer YOUR_JWT_TOKEN
 ## Orders
 
 ### Create Order
-POST http://localhost:5000/api/orders
+POST {{api.base}}/api/orders
 Authorization: Bearer YOUR_JWT_TOKEN
 Content-Type: application/json
 
@@ -139,15 +144,15 @@ Content-Type: application/json
 }
 
 ### Get User Orders
-GET http://localhost:5000/api/orders
+GET {{api.base}}/api/orders
 Authorization: Bearer YOUR_JWT_TOKEN
 
 ### Get Order Details
-GET http://localhost:5000/api/orders/ORDER_ID
+GET {{api.base}}/api/orders/ORDER_ID
 Authorization: Bearer YOUR_JWT_TOKEN
 
 ### Update Order Status (Admin)
-PUT http://localhost:5000/api/orders/ORDER_ID/status
+PUT {{api.base}}/api/orders/ORDER_ID/status
 Authorization: Bearer YOUR_JWT_TOKEN
 Content-Type: application/json
 
@@ -157,7 +162,7 @@ Content-Type: application/json
 }
 
 ### Cancel Order
-DELETE http://localhost:5000/api/orders/ORDER_ID/cancel
+DELETE {{api.base}}/api/orders/ORDER_ID/cancel
 Authorization: Bearer YOUR_JWT_TOKEN
 
 ---
@@ -165,11 +170,11 @@ Authorization: Bearer YOUR_JWT_TOKEN
 ## Users
 
 ### Get User Profile
-GET http://localhost:5000/api/users/profile
+GET {{api.base}}/api/users/profile
 Authorization: Bearer YOUR_JWT_TOKEN
 
 ### Update User Profile
-PUT http://localhost:5000/api/users/profile
+PUT {{api.base}}/api/users/profile
 Authorization: Bearer YOUR_JWT_TOKEN
 Content-Type: application/json
 
@@ -186,7 +191,7 @@ Content-Type: application/json
 }
 
 ### Get All Users (Admin)
-GET http://localhost:5000/api/users
+GET {{api.base}}/api/users
 Authorization: Bearer YOUR_JWT_TOKEN
 
 ---

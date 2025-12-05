@@ -77,10 +77,10 @@ npm install
 npm run dev
 ```
 
-You should see:
+You should see (host/port may vary):
 ```
 ✅ MongoDB connected
-🚀 Full-Stack Server running on http://localhost:5000
+🚀 Full-Stack Server running on http://<HOST>:<PORT> (defaults to HOST=localhost, PORT=5000)
 ```
 
 ### Run Automated Tests

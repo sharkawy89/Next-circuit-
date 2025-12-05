@@ -56,9 +56,9 @@ npm run dev
 npm start
 ```
 
-You should see:
+You should see (host/port may vary depending on your env):
 ```
-Server running on http://localhost:5000
+Server running on http://<HOST>:<PORT> (defaults HOST=localhost, PORT=5000)
 MongoDB connected
 ```
 
@@ -66,17 +66,17 @@ MongoDB connected
 
 ### Using cURL
 ```bash
-# Check if server is running
-curl http://localhost:5000/api/health
+# Check if server is running (replace HOST/PORT as needed):
+curl http://<HOST>:<PORT>/api/health
 
 # Get all products
-curl http://localhost:5000/api/products
+curl http://<HOST>:<PORT>/api/products
 ```
 
 ### Using Postman
 1. Download Postman from https://www.postman.com/downloads/
 2. Import the API routes
-3. Set base URL to `http://localhost:5000`
+3. Set base URL to `http://<HOST>:<PORT>` (defaults to HOST=localhost, PORT=5000) or use `location.origin` in browser-hosted frontends
 4. Start testing endpoints
 
 ### Using VS Code REST Client
@@ -90,9 +90,9 @@ curl http://localhost:5000/api/products
 - Make sure MongoDB is running locally or Atlas connection string is correct
 - Check if port 27017 is not blocked
 
-### "Port 5000 already in use"
-- Change PORT in `.env` file
-- Or kill the process: `lsof -ti:5000 | xargs kill -9`
+### "Port in use"
+- Change PORT in `.env` file (default is 5000)
+- Or kill the process: `npx kill-port <PORT>` (recommended cross-platform) or use OS-specific tools
 
 ### "Cannot find module 'express'"
 - Run `npm install` in the backend directory
@@ -103,7 +103,10 @@ curl http://localhost:5000/api/products
 Update your frontend JavaScript to use the backend API:
 
 ```javascript
-const API_URL = 'http://localhost:5000/api';
+// In browser environments prefer relative path so requests follow the page origin:
+const API_URL = `${location.origin}/api`;
+// Or expose a custom base from server or build system:
+// window.__API_BASE__ = 'https://api.example.com'; const API_URL = window.__API_BASE__ || `${location.origin}/api`;
 
 // Example: Register
 async function register(name, email, password) {

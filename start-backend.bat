@@ -20,7 +20,10 @@ echo ✓ Dependencies installed
 echo.
 
 echo Step 2: Starting backend server...
-echo Server will run on http://localhost:5000
+rem Use PORT/HOST environment variables when available; fall back to defaults
+if "%PORT%"=="" set PORT=5000
+if "%HOST%"=="" set HOST=localhost
+echo Server will run on http://%HOST%:%PORT%
 echo Press Ctrl+C to stop
 echo.
 

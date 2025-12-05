@@ -218,8 +218,21 @@
   "variable": [
     {
       "key": "base_url",
-      "value": "http://localhost:5000",
-      "type": "string"
+      "value": "http://{{host}}:{{port}}",
+      "type": "string",
+      "description": "Base URL using host/port variables (change host/port variables below)"
+    },
+    {
+      "key": "host",
+      "value": "localhost",
+      "type": "string",
+      "description": "Host for API base (e.g. localhost)"
+    },
+    {
+      "key": "port",
+      "value": "5000",
+      "type": "string",
+      "description": "Port for API base (e.g. 5000)"
     },
     {
       "key": "token",

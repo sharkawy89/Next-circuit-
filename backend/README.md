@@ -45,7 +45,7 @@ npm run dev
 npm start
 ```
 
-Server will run on `http://localhost:5000`
+Server will run on `http://localhost:${PORT:-5000}` (replace PORT in `.env` if changed)
 
 ## API Endpoints
 
@@ -84,7 +84,7 @@ Server will run on `http://localhost:5000`
 
 ### Register User
 ```bash
-POST http://localhost:5000/api/auth/register
+POST http://localhost:${PORT:-5000}/api/auth/register
 Content-Type: application/json
 
 {
@@ -97,7 +97,7 @@ Content-Type: application/json
 
 ### Login
 ```bash
-POST http://localhost:5000/api/auth/login
+POST http://localhost:${PORT:-5000}/api/auth/login
 Content-Type: application/json
 
 {
@@ -108,17 +108,17 @@ Content-Type: application/json
 
 ### Get All Products
 ```bash
-GET http://localhost:5000/api/products
+GET http://localhost:${PORT:-5000}/api/products
 ```
 
 ### Filter Products
 ```bash
-GET http://localhost:5000/api/products?category=smartphones&minPrice=500&maxPrice=1500
+GET http://localhost:${PORT:-5000}/api/products?category=smartphones&minPrice=500&maxPrice=1500
 ```
 
 ### Add to Cart (requires token)
 ```bash
-POST http://localhost:5000/api/cart/add
+POST http://localhost:${PORT:-5000}/api/cart/add
 Authorization: Bearer <your_jwt_token>
 Content-Type: application/json
 
@@ -130,7 +130,7 @@ Content-Type: application/json
 
 ### Create Order (requires token)
 ```bash
-POST http://localhost:5000/api/orders
+POST http://localhost:${PORT:-5000}/api/orders
 Authorization: Bearer <your_jwt_token>
 Content-Type: application/json
 

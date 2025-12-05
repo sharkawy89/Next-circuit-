@@ -318,7 +318,7 @@ Test 6: Password Validation
 cd backend
 npm run dev
 # Wait for: ✅ MongoDB connected
-#           🚀 Full-Stack Server running on http://localhost:5000
+#           🚀 Full-Stack Server running on http://<HOST>:<PORT> (e.g. http://<HOST>:<PORT>)
 ```
 
 **In a new terminal, run tests:**
@@ -562,7 +562,7 @@ Get-Process -Name node | Stop-Process -Force
 - [ ] MongoDB is running before starting backend
 - [ ] Backend server starts without connection errors
 - [ ] Test script runs and all tests pass ✅
-- [ ] Frontend can reach backend at `http://localhost:5000`
+- [ ] Frontend can reach backend at `http://localhost:${PORT:-5000}` (or `${location.origin}` in browser)
 - [ ] Signup creates user in MongoDB
 - [ ] Login works with correct credentials
 - [ ] Invalid credentials are rejected

@@ -73,21 +73,21 @@ cd backend
 npm run dev
 ```
 
-**Expected output:**
+**Expected output (host/port may vary):**
 ```
 ✅ MongoDB connected
-🚀 Full-Stack Server running on http://localhost:5000
-📖 Visit http://localhost:5000 to see the app
-📡 API available at http://localhost:5000/api
+🚀 Full-Stack Server running on http://<HOST>:<PORT> (defaults to HOST=localhost, PORT=5000)
+📖 Visit http://<HOST>:<PORT> to see the app
+📡 API available at http://<HOST>:<PORT>/api
 ```
 
 ### Step 5: Access Application
 
-Open in browser:
-- **Home Page:** http://localhost:5000
-- **Sign Up:** http://localhost:5000/signup.html
-- **Login:** http://localhost:5000/login.html
-- **API Health:** http://localhost:5000/api/health
+Open in browser (replace PORT if you changed it):
+- **Home Page:** http://localhost:${PORT:-5000}
+- **Sign Up:** http://localhost:${PORT:-5000}/signup.html
+- **Login:** http://localhost:${PORT:-5000}/login.html
+- **API Health:** http://localhost:${PORT:-5000}/api/health
 
 ### Step 6: Test Authentication Flow
 

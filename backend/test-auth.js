@@ -14,7 +14,9 @@
 const http = require('http');
 
 // Configuration
-const API_BASE = 'http://localhost:5000/api';
+// API_BASE may be overridden by environment variable (useful in CI/deployments)
+// Fallback: construct from HOST/PORT env vars (defaults HOST=localhost, PORT=5000)
+const API_BASE = process.env.API_BASE || `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 5000}/api`;
 const MAX_RETRIES = 30; // Try for 30 seconds
 const RETRY_DELAY = 1000; // 1 second between retries
 

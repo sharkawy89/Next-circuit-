@@ -2,10 +2,14 @@ const http = require('http');
 
 console.log('Testing server connection...');
 
+// Allow overrides using API_BASE env or use PORT/HOST when available
+const API_BASE = process.env.API_BASE || `http://${process.env.HOST || '127.0.0.1'}:${process.env.PORT || 5000}/api`;
+const url = new URL(API_BASE + '/health');
+
 const options = {
-  hostname: '127.0.0.1',
-  port: 5000,
-  path: '/api/health',
+  hostname: url.hostname,
+  port: url.port || 80,
+  path: url.pathname + url.search,
   method: 'GET',
   timeout: 5000
 };
