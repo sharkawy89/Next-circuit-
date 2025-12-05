@@ -15,6 +15,28 @@ app.use(cors());
 app.use(morgan('dev')); // HTTP request logging
 app.use(express.json());
 
+const allowedOrigins = [
+    // Your Vercel domain (e.g., https://next-circuit-xxxx.vercel.app)
+    'https://next-circuit-yur1.vercel.app', 
+    'http://localhost:5000' // For local testing
+];
+
+const corsOptions = {
+    // Allows requests from the domains in your allowedOrigins array
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Ensure OPTIONS is included
+    allowedHeaders: ['Content-Type', 'Authorization'], // Important for JWT
+    credentials: true
+};
+
+app.use(cors(corsOptions));
+
 // Serve static frontend files
 const frontendPath = path.join(__dirname, '../');
 app.use(express.static(frontendPath));
@@ -22,6 +44,7 @@ app.use(express.static(frontendPath));
 // Connect to MongoDB
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/next-circuit';
 console.log(`📡 Connecting to MongoDB...`);
+
 
 const connectWithRetry = async (retries = 5) => {
     for (let i = 0; i < retries; i++) {
