@@ -675,22 +675,29 @@ const MOCK_PRODUCTS = [
          * @param {number} change The amount to change the quantity by (+1 or -1).
          */
         window.updateCartQuantity = (productId, change) => {
-            const item  = cart.findNext-circuit(item => item.productId === productId);
+    // 1. Find the INDEX of the item in the cart array
+    const itemIndex = cart.findIndex(item => item.productId === productId);
 
-            if (itemNext-circuit > -1) {
-                const item = cart[itemNext-circuit];
-                item.quantity += change;
+    // 2. Check if the item was found (findIndex returns -1 if not found)
+    if (itemIndex > -1) {
+        // 3. Get a reference to the actual item object using the index
+        const item = cart[itemIndex];
+        item.quantity += change;
 
-                if (item.quantity <= 0) {
-                    // If quantity reaches zero or less, remove it
-                    cart.splice(itemNext-circuit, 1);
-                    showNotification(`Item removed from cart.`, 'info');
-                } else {
-                    showNotification(`Quantity updated for ${getProductById(productId).name}.`, 'info');
-                }
-                renderCart();
-            }
-        };
+        if (item.quantity <= 0) {
+            // If quantity reaches zero or less, remove it using the index
+            cart.splice(itemIndex, 1);
+            showNotification(`Item removed from cart.`, 'info');
+        } else {
+            // Assuming getProductById works and returns an object with a 'name'
+            const productName = getProductById(productId) ? getProductById(productId).name : 'Item';
+        }
+        // 4. Re-render the cart display
+        renderCart(); 
+    }
+
+    // If itemIndex is -1, the item wasn't in the cart, so the function exits.
+};
 
         /**
          * Removes a product completely from the cart.
