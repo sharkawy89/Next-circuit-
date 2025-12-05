@@ -97,7 +97,7 @@ const HOST = process.env.HOST || 'localhost';
 
 app.listen(PORT, () => {
     // Use HOST env var if provided for flexible messaging in containers/hosts
-    console.log(`🚀 Full-Stack Server running on http://${HOST}:${PORT}`);
+    module.exports = app;
     console.log(`📖 Visit http://${HOST}:${PORT} to see the app`);
     console.log(`📡 API available at http://${HOST}:${PORT}/api`);
 });
@@ -116,4 +116,4 @@ app.get('*', (req, res) => {
 });
 
 // Replace app.listen with module.exports for Vercel
-module.exports = app;
+module.exports = app; 
