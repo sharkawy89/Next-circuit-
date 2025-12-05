@@ -43,6 +43,18 @@ app.use(express.static(frontendPath));
 
 // Connect to MongoDB
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/next-circuit';
+mongoose.connect(dbUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    // Add other necessary options you used locally
+})
+.then(() => console.log('MongoDB Connected Successfully on Vercel!'))
+.catch(err => {
+    // THIS LINE IS CRITICAL: If the connection fails, the server CRASHES.
+    console.error('MongoDB Connection Error:', err.message);
+    // You MUST see this error in your Vercel logs if the connection fails.
+    // If you don't see this, the server is crashing earlier.
+});
 console.log(`📡 Connecting to MongoDB...`);
 
 
