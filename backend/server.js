@@ -21,22 +21,40 @@ app.use(express.static(frontendPath));
 
 // Connect to MongoDB
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/next-circuit';
-mongoose.connect(mongoUri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 50000 
-})
-.then(() => console.log('✅ MongoDB connected'))
-.catch(err => {
-    console.error('❌ MongoDB connection error:', err && err.message ? err.message : err);
-    console.error('📌 Tips: Ensure MongoDB is running and `MONGODB_URI` is correct.');
-    // Exit so the developer sees the failure immediately (prevents server running without DB)
-    process.exit(1);
-});
+console.log(`📡 Connecting to MongoDB...`);
+
+const connectWithRetry = async (retries = 5) => {
+    for (let i = 0; i < retries; i++) {
+        try {
+            await mongoose.connect(mongoUri, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                serverSelectionTimeoutMS: 10000,
+                socketTimeoutMS: 45000,
+            });
+            console.log('✅ MongoDB connected successfully');
+            return;
+        } catch (err) {
+            console.error(`❌ MongoDB connection attempt ${i + 1}/${retries} failed:`, err?.message);
+            if (i === retries - 1) {
+                console.error('📌 MongoDB connection failed after all retries.');
+                console.error('📌 For MongoDB Atlas, ensure:');
+                console.error('   1. Your IP is whitelisted in Atlas Network Access');
+                console.error('   2. Database user credentials are correct');
+                console.error('   3. MONGODB_URI format is: mongodb+srv://username:password@cluster.mongodb.net/database?retryWrites=true&w=majority');
+                process.exit(1);
+            }
+            // Wait before retry
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        }
+    }
+};
+
+connectWithRetry();
 
 // More detailed connection error events
 mongoose.connection.on('error', err => {
-    console.error('🛑 Mongoose connection error event:', err && err.message ? err.message : err);
+    console.error('🛑 Mongoose connection error event:', err?.message || err);
 });
 
 // API Routes
