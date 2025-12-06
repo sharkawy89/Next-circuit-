@@ -9,7 +9,7 @@ let currentUser = localStorage.getItem('currentUser') ? JSON.parse(localStorage.
 
 // Fallback to mock data if offline
 const MOCK_PRODUCTS = [
-            // Smartphones
+            // Smartphones 
             {
                 id: 1,
                 name: 'iPhone 15 Pro Max 256GB',
