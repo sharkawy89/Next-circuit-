@@ -48,7 +48,7 @@ app.use(express.static(frontendPath));
 
 // Connect to MongoDB
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/next-circuit';
-mongoose.connect(dbUri, {
+mongoose.connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     // Add other necessary options you used locally
