@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const path = require('path');
 const morgan = require('morgan');
+const compression = require('compression');  // Compression responses
 
 // Load environment variables
 dotenv.config();
@@ -14,11 +15,12 @@ const app = express();
 app.use(cors());
 app.use(morgan('dev')); // HTTP request logging
 app.use(express.json());
+app.use(compression());
 
 const allowedOrigins = [
-    // Your Vercel domain (e.g., https://next-circuit-xxxx.vercel.app)
-    'https://next-circuit-43ai.vercel.app', 
-    'http://localhost:5000' // For local testing
+    'https://next-circuit-43ai.vercel.app' ,
+    process.env.FRONTEND_URL || 'http://localhost:5000'
+    
 ];
 
 const corsOptions = {
@@ -36,9 +38,9 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-// Compression responses
-const compression = require('compression'); 
-app.use(compression());
+
+
+
 
 // Serve static frontend files
 const frontendPath = path.join(__dirname, '../');
