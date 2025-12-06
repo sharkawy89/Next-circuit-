@@ -135,12 +135,17 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 const HOST = process.env.HOST || 'localhost';
 
-app.listen(PORT, () => {
+// 2. Conditional Listening (Only run app.listen locally)
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, HOST, () => {
+        console.log(`Server running at http://${HOST}:${PORT}`);
+    });
+}
+
+
     // Use HOST env var if provided for flexible messaging in containers/hosts
     module.exports = app;
-    console.log(`📖 Visit http://${HOST}:${PORT} to see the app`);
-    console.log(`📡 API available at http://${HOST}:${PORT}/api`);
-});
+    
  
 
 // At the end of your backend/server.js file:
