@@ -47,12 +47,23 @@ const frontendPath = path.join(__dirname, '../');
 app.use(express.static(frontendPath));
 
 // Connect to MongoDB
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/next-circuit';
+// 1. Get the URI directly. Vercel MUST have this variable set.
+const mongoUri = process.env.MONGODB_URI; 
+
+// 2. Add a check to prevent crashing if the variable is truly missing
+if (!mongoUri) {
+    console.error("FATAL: MONGODB_URI is not set in environment variables!");
+    // You could exit the process here or let the Mongoose connection fail
+}
+
+// 3. Connect using the correct variable
 mongoose.connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    // Add other necessary options you used locally
+    // ...
 })
+// ...
+    
 .then(() => console.log('MongoDB Connected Successfully on Vercel!'))
 .catch(err => {
     // THIS LINE IS CRITICAL: If the connection fails, the server CRASHES.
