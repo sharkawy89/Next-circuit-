@@ -13,10 +13,9 @@
     "api",
     "express"
   ],
-"engines": {
-    "node": "22.x" 
-},
-
+  "engines": {
+    "node": "22.x"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -28,6 +27,7 @@
     "gh-pages": "^6.3.0",
     "joi": "^17.10.0",
     "jsonwebtoken": "^9.0.0",
+    "mongodb": "^7.0.0",
     "mongoose": "^7.0.0",
     "morgan": "^1.10.0",
     "validator": "^13.9.0"
